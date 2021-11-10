@@ -10,12 +10,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/hackathon", name="home")
      */
     public function index(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $products = $repository->findAll();
-        return $this->render('serie/index.html.twig', ['lesHackathons' => $products]);        
+        return $this->render('listeHackathon.html.twig', ['lesHackathons' => $products]);        
     }
+
+    /**
+     * @Route("/hackathon/{id}", name="hackathon")
+     */
+        public function getLaSerie($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $product = $repository->find($id);
+        return $this->render('unHackathon.html.twig', ["unHackathon" =>$product]);
+     }
+
 }
