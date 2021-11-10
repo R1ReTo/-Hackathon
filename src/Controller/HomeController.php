@@ -14,6 +14,6 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('Hackathon/pageAccueil.html.twig');
+        return $this->render('pageAccueil.html.twig');
     }
 }
