@@ -19,6 +19,19 @@
 	<div class="row">
 		<div class="container">
 			<div class="col-sm-8">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						Listes Villes
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					{% for uneVille in lesVilles %}
+
+						<li>
+							<a class="dropdown-item" href={{path ('hackathon', {'ville':uneVille.ville} )}}>Action</a>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
 
 				{% for unHackathon in lesHackathons %}
 
