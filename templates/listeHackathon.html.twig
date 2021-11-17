@@ -21,20 +21,14 @@
 		<h1>Liste des hackathons</h1>
 		<h2>Selectionnez l'id d'un hackathon pour avoir plus d'information</h2>
 		<div class="dropdown">
-			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+			<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
 				Id hackathon
-			</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-				<li>
-					<a class="dropdown-item" href="#">Action</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#">Another action</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#">Something else here</a>
-				</li>
-			</ul>
+			</a>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				{% for unHackathon in lesHackathons %}
+					<a class="dropdown-item">{{unHackathon.idhackathon}}</a>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 	<br>
@@ -51,4 +45,3 @@
 		</table>
 	</div>
 {% endblock %}
-	
