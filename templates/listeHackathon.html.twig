@@ -16,17 +16,18 @@
 			padding: 2px 6px;
 		}
 	</style>
-
+	<br><br>
+	<h1 style="text-align:center;">Liste des hackathons</h1>
+	<br>
 	<div class="example-wrapper">
-
-		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-pagination="true" data-search="true">
+		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-search="true">
 			<thead>
 				<tr>
-					<th data-sortable="true" data-field="idhackathon">Item ID</th>
-					<th data-field="datedebut">Item Name</th>
-					<th data-field="heuredebut">Item Price</th>
+					<th data-sortable="true" data-field="theme">Thème</th>
+					<th data-field="ville">Ville</th>
+					<th data-field="lieu">Lieu</th>
 				</tr>
 			</thead>
 		</table>
 	</div>
-	{% endblock %}
+{% endblock %}
