@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SerieController!
+{% block title %}Hackathon
 {% endblock %}
 
 {% block body %}
@@ -17,12 +17,32 @@
 		}
 	</style>
 	<br><br>
-	<h1 style="text-align:center;">Liste des hackathons</h1>
+	<div style="text-align:center;">
+		<h1>Liste des hackathons</h1>
+		<h2>Selectionnez l'id d'un hackathon pour avoir plus d'information</h2>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Id hackathon
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				<li>
+					<a class="dropdown-item" href="#">Action</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#">Another action</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="#">Something else here</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<br>
 	<div class="example-wrapper">
 		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-search="true">
 			<thead>
 				<tr>
+					<th data-field="idhackathon">Id</th>
 					<th data-sortable="true" data-field="theme">Thème</th>
 					<th data-field="ville">Ville</th>
 					<th data-field="lieu">Lieu</th>
