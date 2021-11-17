@@ -16,7 +16,23 @@
 			padding: 2px 6px;
 		}
 	</style>
-	
+	<div class="example-wrapper" style="text-align:center;">
+			<div class="card" style="width: 50rem; text-align: center;">
+				<div class="card-body">
+					<h2><p class="card-text">{{unHackathon.theme}}</p></h2>
+					<p class="card-text">Lieu : {{unHackathon.lieu}}</p>
+					<p class="card-text">Ville : {{unHackathon.ville}}</p>
+                    <p class="card-text">Rue : {{unHackathon.rue}}</p>
+                    <p class="card-text">Code postal : {{unHackathon.cp}}</p>
+                    <p class="card-text">Date de debut : {{unHackathon.datedebut|date('d/m/Y')}}</p>
+                    <p class="card-text">Heure de debut : {{unHackathon.heuredebut|date('H:i:s')}}</p>
+                    <p class="card-text">Date de fin : {{unHackathon.dateFin|date('d/m/Y')}}</p>
+                    <p class="card-text">Heure de fin : {{unHackathon.heureFin|date('H:i:s')}}</p>
+                    <p class="card-text">Date limite pour l'inscription : {{unHackathon.dateLimite|date('d/m/Y')}}</p>
+                    <p class="card-text">Nombres de places restantes : {{unHackathon.nbplaces}}</p>
+				</div>
+			</div>
 
-    Bonjour
+		</div>
+
 {% endblock %}
