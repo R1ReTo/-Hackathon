@@ -35,12 +35,4 @@ class HackathonRespositorie extends ServiceEntityRepository
         ;
     }
     */
-    
-    public function getUneVille()
-    {
-        return $this->createQueryBuilder('s')
-        ->distinct('s.ville')
-        ->getQuery()
-        ->getResult();
-    }
 }

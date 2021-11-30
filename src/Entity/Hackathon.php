@@ -98,6 +98,16 @@ class Hackathon
      */
     private $nbplaces;
 
+<<<<<<< HEAD
+=======
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+>>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
     public function getIdhackathon(): ?int
     {
         return $this->idhackathon;
@@ -235,5 +245,20 @@ class Hackathon
         return $this;
     }
 
+<<<<<<< HEAD
+=======
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+>>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
 
 }
