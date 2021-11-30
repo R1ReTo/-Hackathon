@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Participant
+ * Paricipant
  *
  * @ORM\Table(name="paricipant")
  * @ORM\Entity
