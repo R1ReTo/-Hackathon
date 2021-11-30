@@ -19,16 +19,15 @@
 	<br><br>
 	<div style="text-align:center;">
 		<h1>Liste des hackathons</h1>
-		<h2>Selectionnez l'id d'un hackathon pour avoir plus d'information</h2>
+		<h2>Selectionnez le thème d'un hackathon pour avoir plus d'information</h2>
 		<div class="dropdown">
 			<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-				Numéro du Hackathon
+				Thèmes
 			</a>
-
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-				<a class="dropdown-item" href="#">Action</a>
-				<a class="dropdown-item" href="#">Another action</a>
-				<a class="dropdown-item" href="#">Something else here</a>
+				{% for unHackathon in lesHackathons %}
+					<a class="dropdown-item" href={{path('detailHackathon',{'id':unHackathon.idhackathon})}}>{{unHackathon.theme}}</a>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -37,7 +36,6 @@
 		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-search="true">
 			<thead>
 				<tr>
-					<th data-field="idhackathon">Id</th>
 					<th data-sortable="true" data-field="theme">Thème</th>
 					<th data-field="ville">Ville</th>
 					<th data-field="lieu">Lieu</th>

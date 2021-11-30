@@ -42,4 +42,14 @@ class HomeController extends AbstractController
     {
         return $this->render('pageAccueil.html.twig');
     }
+
+    /**
+     * @Route("/hackathon/{id}", name="detailHackathon")
+     */
+    public function detailHackathon($id): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $hackathon = $repository->find($id);
+        return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
+    }
 }
