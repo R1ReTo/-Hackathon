@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Hackathon;
+use App\Entity\Inscription;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,4 +53,18 @@ class HomeController extends AbstractController
         $hackathon = $repository->find($id);
         return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
     }
+
+    /**
+     * @Route("/inscription/{idparticipant}&{idhackathon}&{dateincription}", name="detailHackathon")
+     */
+   /* public function inscription($idparticipant,$idhackathon,$dateincription)
+    {
+        $inscription = new Inscription();
+        $inscription->setIdparticipant($idparticipant);
+        $inscription->setIdhackathon($idhackathon);
+        $inscription->setDateincription($dateincription);
+        return $this->render('pageAccueil.html.twig');
+    }
+    */
+
 }

@@ -9,5 +9,17 @@
 		<h1 style="text-align: center;">Hackathon</h1>
 		<h3 style="text-align: center;">Page d'accueil</h3>
 	</div>
-    <img src="https://www.piworld.com/wp-content/uploads/sites/2/2019/05/Hackathon-pic.png" style="margin-right:35%; margin-left:36%; margin-top:100px; height: 350px; width: 530px;">
-{% endblock %}
+	<img src="https://www.piworld.com/wp-content/uploads/sites/2/2019/05/Hackathon-pic.png" style="margin-right:35%; margin-left:36%; margin-top:100px; height: 350px; width: 530px;">
+	<div class="row">
+		<span class="form-group">
+			<div class="input-group">
+				<div>
+					{{ form_start(form, {"method": "POST", "attr":{"novalidate":"novalidate"}}) }}
+					{{ form_row(form.idparticipant) }}
+					{{ form_row(form.idhackathon) }}
+					{{ form_row(form.dateincription) }}
+					<button type="submit" class="btn btn-primary" href={{path('inscription',{'idparticipant':form.idparticipant} ,{'idhackathon' :form.idhackathon},{'dateincription' :form.dateincription})}}>{{ btnvalue }}</button>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		{% endblock %}

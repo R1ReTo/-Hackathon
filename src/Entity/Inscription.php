@@ -22,66 +22,31 @@ class Inscription
     private $numincription;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="IDPARTICIPANT", type="integer", nullable=false)
-     */
-    private $idparticipant;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IDHACKATHON", type="integer", nullable=false)
-     */
-    private $idhackathon;
-
-    /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="DATEINCRIPTION", type="date", nullable=true)
      */
     private $dateincription;
 
-    public function getNumincription(): ?int
-    {
-        return $this->numincription;
-    }
+    /**
+     * @var \Hackathon
+     *
+     * @ORM\ManyToOne(targetEntity="Hackathon")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDHACKATHON", referencedColumnName="IDHACKATHON")
+     * })
+     */
+    private $idhackathon;
 
-    public function getIdparticipant(): ?int
-    {
-        return $this->idparticipant;
-    }
-
-    public function setIdparticipant(int $idparticipant): self
-    {
-        $this->idparticipant = $idparticipant;
-
-        return $this;
-    }
-
-    public function getIdhackathon(): ?int
-    {
-        return $this->idhackathon;
-    }
-
-    public function setIdhackathon(int $idhackathon): self
-    {
-        $this->idhackathon = $idhackathon;
-
-        return $this;
-    }
-
-    public function getDateincription(): ?\DateTimeInterface
-    {
-        return $this->dateincription;
-    }
-
-    public function setDateincription(?\DateTimeInterface $dateincription): self
-    {
-        $this->dateincription = $dateincription;
-
-        return $this;
-    }
+    /**
+     * @var \Paricipant
+     *
+     * @ORM\ManyToOne(targetEntity="Paricipant")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDPARTICIPANT", referencedColumnName="IDPARTICIPANT")
+     * })
+     */
+    private $idparticipant;
 
 
 }
