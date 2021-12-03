@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Hackathon;
+use App\Entity\Paricipant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,5 +52,15 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $hackathon = $repository->find($id);
         return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
+    }
+
+    /**
+     * @Route("/inscription", name="inscription")
+     */
+    public function inscription(): Response
+    {
+        $form = $this->createForm(Paricipant::class);
+        return $this->render('inscription.html.twig',['form' => $form->createView()]);
+        
     }
 }

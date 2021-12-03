@@ -33,14 +33,23 @@
 	</div>
 	<br>
 	<div class="example-wrapper">
-		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-search="true">
+		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-search="true" id="table">
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="theme">Thème</th>
 					<th data-field="ville">Ville</th>
 					<th data-field="lieu">Lieu</th>
+					<th data-field="nbplaces">Nombres de places restantes</th>
+					<th data-field="datelimite">Date limite d'inscription</th>
 				</tr>
 			</thead>
 		</table>
 	</div>
+
+	<script>
+	$('#table').on('click-row.bs.table', function (element,row, field) {
+		console.log(row);
+		window.open("http://localhost:8000/hackathon/"+row.idhackathon,"_self")
+	})
+	</script>
 {% endblock %}
