@@ -22,53 +22,35 @@ class Inscription
     private $numincription;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="IDPARTICIPANT", type="integer", nullable=false)
-     */
-    private $idparticipant;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IDHACKATHON", type="integer", nullable=false)
-     */
-    private $idhackathon;
-
-    /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="DATEINCRIPTION", type="date", nullable=true)
      */
     private $dateincription;
 
+    /**
+     * @var \Hackathon
+     *
+     * @ORM\ManyToOne(targetEntity="Hackathon")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDHACKATHON", referencedColumnName="IDHACKATHON")
+     * })
+     */
+    private $idhackathon;
+
+    /**
+     * @var \Participant
+     *
+     * @ORM\ManyToOne(targetEntity="Participant")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDPARTICIPANT", referencedColumnName="IDPARTICIPANT")
+     * })
+     */
+    private $idparticipant;
+
     public function getNumincription(): ?int
     {
         return $this->numincription;
-    }
-
-    public function getIdparticipant(): ?int
-    {
-        return $this->idparticipant;
-    }
-
-    public function setIdparticipant(int $idparticipant): self
-    {
-        $this->idparticipant = $idparticipant;
-
-        return $this;
-    }
-
-    public function getIdhackathon(): ?int
-    {
-        return $this->idhackathon;
-    }
-
-    public function setIdhackathon(int $idhackathon): self
-    {
-        $this->idhackathon = $idhackathon;
-
-        return $this;
     }
 
     public function getDateincription(): ?\DateTimeInterface
@@ -79,6 +61,30 @@ class Inscription
     public function setDateincription(?\DateTimeInterface $dateincription): self
     {
         $this->dateincription = $dateincription;
+
+        return $this;
+    }
+
+    public function getIdhackathon(): ?Hackathon
+    {
+        return $this->idhackathon;
+    }
+
+    public function setIdhackathon(?Hackathon $idhackathon): self
+    {
+        $this->idhackathon = $idhackathon;
+
+        return $this;
+    }
+
+    public function getIdparticipant(): ?Participant
+    {
+        return $this->idparticipant;
+    }
+
+    public function setIdparticipant(?Participant $idparticipant): self
+    {
+        $this->idparticipant = $idparticipant;
 
         return $this;
     }

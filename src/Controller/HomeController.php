@@ -3,55 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\Hackathon;
-<<<<<<< HEAD
-use App\Repository\HackathonRespositorie;
+use App\Entity\Participant;
+use App\Form\ParticipantType;
+use App\Repository\HackathonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-=======
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer;
->>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
+
 
 class HomeController extends AbstractController
 {
     /**
-<<<<<<< HEAD
-     * @Route("/hackathon", name="home")
+     * @Route("/", name="home")
      */
-    /*public function index(): Response
+    public function accueil(): Response
     {
-        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $products = $repository->findAll();
-        $ville = $repository->getUneVille();
-        return $this->render('listeHackathon.html.twig', ['lesHackathons' => $products, "lesVilles" =>$ville]);        
+        return $this->render('pageAccueil.html.twig');
     }
-
-    /**
-     * @Route("/hackathon/{id}", name="hackathon")
-     */
-        public function getLeHackathon($id)
-    {
-        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $product = $repository->find($id);
-        return $this->render('unHackathon.html.twig', ["unHackathon" =>$product]);
-     }
 
 
      /**
-     * @Route("/hackathon/{ville}", name="hackathon")
-     */
-    /*public function getLaVille($ville)
-    {
-        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $product = $repository->find($ville);
-        return $this->render('unHackathon.html.twig', ["lesVilles" =>$product]);
-     }*/
-
-=======
      * @Route("/listeHackathon", name="listeHackathon")
      */
     public function index(): Response
@@ -75,14 +49,7 @@ class HomeController extends AbstractController
     }
 
 
-    /**
-     * @Route("/", name="home")
-     */
-    public function accueil(): Response
-    {
-        return $this->render('pageAccueil.html.twig');
-    }
-
+ 
     /**
      * @Route("/hackathon/{id}", name="detailHackathon")
      */
@@ -92,5 +59,4 @@ class HomeController extends AbstractController
         $hackathon = $repository->find($id);
         return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
     }
->>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
 }

@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %}
 
-<<<<<<< HEAD
-{% block title %}Hello SerieController!
-=======
-{% block title %}Hackathon
->>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
+{% block title %}
 {% endblock %}
 
 {% block body %}
@@ -20,40 +16,6 @@
 			padding: 2px 6px;
 		}
 	</style>
-<<<<<<< HEAD
-	<div class="row">
-		<div class="container">
-			<div class="col-sm-8">
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-						Listes Villes
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					{% for uneVille in lesVilles %}
-
-						<li>
-							<a class="dropdown-item" href={{path ('hackathon', {'ville':uneVille.ville} )}}>Action</a>
-						</li>
-						{% endfor %}
-					</ul>
-				</div>
-
-				{% for unHackathon in lesHackathons %}
-
-
-					<div class="card" style="width: 18rem;">
-						<div class="card-body">
-							<h5 class="card-title">{{unHackathon.theme}}</h5>
-							<p class="card-text">{{unHackathon.ville}}</p>
-							<a class="btn btn-primary" href={{path ('hackathon', {'id':unHackathon.idhackathon} )}} role="button">
-								En savoir plus
-							</a>
-
-						</div>
-					</div>
-					<br>
-
-=======
 	<br><br>
 	<div style="text-align:center;">
 		<h1>Liste des hackathons</h1>
@@ -65,24 +27,20 @@
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 				{% for unHackathon in lesHackathons %}
 					<a class="dropdown-item" href={{path('detailHackathon',{'id':unHackathon.idhackathon})}}>{{unHackathon.theme}}</a>
->>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
 				{% endfor %}
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-=======
 	<br>
 	<div class="example-wrapper">
 		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-search="true">
 			<thead>
 				<tr>
-					<th data-sortable="true" data-field="theme">Thème</th>
+					<a href="google.fr"><th data-sortable="true" data-field="theme">Thème</th></a>
 					<th data-field="ville">Ville</th>
 					<th data-field="lieu">Lieu</th>
 				</tr>
 			</thead>
 		</table>
-	</div>
->>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
+	</div> 
 {% endblock %}

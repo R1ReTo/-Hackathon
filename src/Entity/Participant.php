@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Participant
  *
- * @ORM\Table(name="paricipant")
+ * @ORM\Table(name="participant")
  * @ORM\Entity
  */
-class Paricipant
+class Participant
 {
     /**
      * @var int
@@ -55,6 +55,20 @@ class Paricipant
      * @ORM\Column(name="PORTFOLIO", type="string", length=50, nullable=true, options={"fixed"=true})
      */
     private $portfolio;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="LOGIN", type="string", length=50, nullable=true, options={"fixed"=true})
+     */
+    private $login;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="PASSWORD", type="string", length=50, nullable=true, options={"fixed"=true})
+     */
+    private $password;
 
     public function getIdparticipant(): ?int
     {
@@ -117,6 +131,30 @@ class Paricipant
     public function setPortfolio(?string $portfolio): self
     {
         $this->portfolio = $portfolio;
+
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(?string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

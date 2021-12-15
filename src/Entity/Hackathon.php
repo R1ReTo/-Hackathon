@@ -80,7 +80,7 @@ class Hackathon
     /**
      * @var string|null
      *
-     * @ORM\Column(name="THEME", type="string", length=32, nullable=true, options={"fixed"=true})
+     * @ORM\Column(name="THEME", type="string", length=255, nullable=true, options={"fixed"=true})
      */
     private $theme;
 
@@ -98,16 +98,13 @@ class Hackathon
      */
     private $nbplaces;
 
-<<<<<<< HEAD
-=======
     /**
      * @var string|null
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="IMAGE", type="string", length=255, nullable=true, options={"fixed"=true})
      */
     private $image;
 
->>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
     public function getIdhackathon(): ?int
     {
         return $this->idhackathon;
@@ -245,8 +242,6 @@ class Hackathon
         return $this;
     }
 
-<<<<<<< HEAD
-=======
     public function getImage(): ?string
     {
         return $this->image;
@@ -259,6 +254,5 @@ class Hackathon
         return $this;
     }
 
->>>>>>> ef80bb34bc1d1ddaf36d579985249e6f60664826
 
 }

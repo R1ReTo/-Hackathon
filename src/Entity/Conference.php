@@ -13,15 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Conference
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="IDEVENEMENT", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idevenement;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="NOMINTERVENANT", type="string", length=20, nullable=true, options={"fixed"=true})
@@ -43,37 +34,16 @@ class Conference
     private $sujet;
 
     /**
-     * @var string|null
+     * @var \Evenement
      *
-     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"fixed"=true})
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Evenement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDEVENEMENT", referencedColumnName="IDEVENEMENT")
+     * })
      */
-    private $libelle;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="DATEHEUREDEBUT", type="datetime", nullable=true)
-     */
-    private $dateheuredebut;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="DATEHEUREFIN", type="datetime", nullable=true)
-     */
-    private $dateheurefin;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="SALLE", type="string", length=10, nullable=true, options={"fixed"=true})
-     */
-    private $salle;
-
-    public function getIdevenement(): ?int
-    {
-        return $this->idevenement;
-    }
+    private $idevenement;
 
     public function getNomintervenant(): ?string
     {
@@ -111,50 +81,14 @@ class Conference
         return $this;
     }
 
-    public function getLibelle(): ?string
+    public function getIdevenement(): ?Evenement
     {
-        return $this->libelle;
+        return $this->idevenement;
     }
 
-    public function setLibelle(?string $libelle): self
+    public function setIdevenement(?Evenement $idevenement): self
     {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getDateheuredebut(): ?\DateTimeInterface
-    {
-        return $this->dateheuredebut;
-    }
-
-    public function setDateheuredebut(?\DateTimeInterface $dateheuredebut): self
-    {
-        $this->dateheuredebut = $dateheuredebut;
-
-        return $this;
-    }
-
-    public function getDateheurefin(): ?\DateTimeInterface
-    {
-        return $this->dateheurefin;
-    }
-
-    public function setDateheurefin(?\DateTimeInterface $dateheurefin): self
-    {
-        $this->dateheurefin = $dateheurefin;
-
-        return $this;
-    }
-
-    public function getSalle(): ?string
-    {
-        return $this->salle;
-    }
-
-    public function setSalle(?string $salle): self
-    {
-        $this->salle = $salle;
+        $this->idevenement = $idevenement;
 
         return $this;
     }
