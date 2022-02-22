@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\ParticipantType;
+use App\Form\ConnexionParticipantType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ParticipantController extends AbstractController
 {
@@ -38,4 +41,14 @@ class ParticipantController extends AbstractController
         }
         return $this->render('participant/inscription.html.twig', ['monForm'=>$form->createView()]);
     }
+/**
+ * @Route("/participant/connexion", name="connexionParticipant")
+ */
+public function login(AuthenticationUtils $authenticationUtils)
+ {
+ $lastUsername=$authenticationUtils->getLastUsername();
+ $errors=$authenticationUtils->getLastAuthenticationError();
+ return $this->render('participant/connexion.html.twig', ['lastUsername'=>$lastUsername, 'errors'=>
+$errors]);
+ }
 }
