@@ -56,70 +56,19 @@ class Paricipant
      */
     private $portfolio;
 
-    public function getIdparticipant(): ?int
-    {
-        return $this->idparticipant;
-    }
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="LOGIN", type="string", length=50, nullable=true, options={"fixed"=true})
+     */
+    private $login;
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(?string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(?string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getAdressemail(): ?string
-    {
-        return $this->adressemail;
-    }
-
-    public function setAdressemail(?string $adressemail): self
-    {
-        $this->adressemail = $adressemail;
-
-        return $this;
-    }
-
-    public function getDatenaissance(): ?\DateTimeInterface
-    {
-        return $this->datenaissance;
-    }
-
-    public function setDatenaissance(?\DateTimeInterface $datenaissance): self
-    {
-        $this->datenaissance = $datenaissance;
-
-        return $this;
-    }
-
-    public function getPortfolio(): ?string
-    {
-        return $this->portfolio;
-    }
-
-    public function setPortfolio(?string $portfolio): self
-    {
-        $this->portfolio = $portfolio;
-
-        return $this;
-    }
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="PASSWORD", type="string", length=50, nullable=true, options={"fixed"=true})
+     */
+    private $password;
 
 
 }

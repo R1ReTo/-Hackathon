@@ -22,13 +22,6 @@ class Evenement
     private $idevenement;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="IDHACKATHON", type="integer", nullable=false)
-     */
-    private $idhackathon;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"fixed"=true})
@@ -56,70 +49,15 @@ class Evenement
      */
     private $salle;
 
-    public function getIdevenement(): ?int
-    {
-        return $this->idevenement;
-    }
-
-    public function getIdhackathon(): ?int
-    {
-        return $this->idhackathon;
-    }
-
-    public function setIdhackathon(int $idhackathon): self
-    {
-        $this->idhackathon = $idhackathon;
-
-        return $this;
-    }
-
-    public function getLibelle(): ?string
-    {
-        return $this->libelle;
-    }
-
-    public function setLibelle(?string $libelle): self
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getDateheuredebut(): ?\DateTimeInterface
-    {
-        return $this->dateheuredebut;
-    }
-
-    public function setDateheuredebut(?\DateTimeInterface $dateheuredebut): self
-    {
-        $this->dateheuredebut = $dateheuredebut;
-
-        return $this;
-    }
-
-    public function getDateheurefin(): ?\DateTimeInterface
-    {
-        return $this->dateheurefin;
-    }
-
-    public function setDateheurefin(?\DateTimeInterface $dateheurefin): self
-    {
-        $this->dateheurefin = $dateheurefin;
-
-        return $this;
-    }
-
-    public function getSalle(): ?string
-    {
-        return $this->salle;
-    }
-
-    public function setSalle(?string $salle): self
-    {
-        $this->salle = $salle;
-
-        return $this;
-    }
+    /**
+     * @var \Hackathon
+     *
+     * @ORM\ManyToOne(targetEntity="Hackathon")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDHACKATHON", referencedColumnName="IDHACKATHON")
+     * })
+     */
+    private $idhackathon;
 
 
 }
