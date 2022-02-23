@@ -61,6 +61,21 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @Route("/hackathon/update/{id}", name="updateHackathon")
+     */
+    // public function updateHackathon($id)
+    // {
+    //     $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+    //     $hackathon = $repository->find($id);
+    //     return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
+    //     $hackathon->setNbplaces($hackathon->getNbplaces()-1);
+    //     $em=$this->getDoctrine()->getManager();
+    //     $em->persist($hackathon);
+    //     $em->flush();
+         
+    // }
+
+    /**
      * @Route("/inscription/{idparticipant}&{idhackathon}&{dateincription}", name="detailHackathon")
      */
    /* public function inscription($idparticipant,$idhackathon,$dateincription)

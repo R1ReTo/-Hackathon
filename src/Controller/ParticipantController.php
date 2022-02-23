@@ -41,14 +41,23 @@ class ParticipantController extends AbstractController
         }
         return $this->render('participant/inscription.html.twig', ['monForm'=>$form->createView()]);
     }
-/**
- * @Route("/participant/connexion", name="connexionParticipant")
- */
-public function login(AuthenticationUtils $authenticationUtils)
- {
- $lastUsername=$authenticationUtils->getLastUsername();
- $errors=$authenticationUtils->getLastAuthenticationError();
- return $this->render('participant/connexion.html.twig', ['lastUsername'=>$lastUsername, 'errors'=>
-$errors]);
- }
+
+    /**
+    * @Route("/participant/connexion", name="connexionParticipant")
+    */
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+    $lastUsername=$authenticationUtils->getLastUsername();
+    $errors=$authenticationUtils->getLastAuthenticationError();
+    return $this->render('participant/connexion.html.twig', ['lastUsername'=>$lastUsername, 'errors'=>$errors]);
+    }
+
+    /**
+    * @Route("/logout", name="security_logout")
+    */
+    public function logout()
+    {
+
+    }
+
 }
