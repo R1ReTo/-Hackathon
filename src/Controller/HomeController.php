@@ -3,16 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\Hackathon;
-use App\Entity\Paricipant;
+use App\Entity\Participant;
+use App\Form\ParticipantType;
+use App\Repository\HackathonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer;
 
+
 class HomeController extends AbstractController
 {
     /**
+     * @Route("/", name="home")
+     */
+    public function accueil(): Response
+    {
+        return $this->render('pageAccueil.html.twig');
+    }
+
+
+     /**
      * @Route("/listeHackathon", name="listeHackathon")
      */
     public function index(): Response
@@ -36,14 +49,7 @@ class HomeController extends AbstractController
     }
 
 
-    /**
-     * @Route("/", name="home")
-     */
-    public function accueil(): Response
-    {
-        return $this->render('pageAccueil.html.twig');
-    }
-
+ 
     /**
      * @Route("/hackathon/{id}", name="detailHackathon")
      */
@@ -55,7 +61,22 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/inscription", name="inscription")
+     * @Route("/hackathon/update/{id}", name="updateHackathon")
+     */
+    // public function updateHackathon($id)
+    // {
+    //     $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+    //     $hackathon = $repository->find($id);
+    //     return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
+    //     $hackathon->setNbplaces($hackathon->getNbplaces()-1);
+    //     $em=$this->getDoctrine()->getManager();
+    //     $em->persist($hackathon);
+    //     $em->flush();
+         
+    // }
+
+    /**
+     * @Route("/inscription/{idparticipant}&{idhackathon}&{dateincription}", name="detailHackathon")
      */
     public function inscription(): Response
     {

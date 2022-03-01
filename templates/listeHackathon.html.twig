@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hackathon
+{% block title %}
 {% endblock %}
 
 {% block body %}
@@ -36,7 +36,7 @@
 		<table data-toggle="table" data-url="http://localhost:8000/getHackathon" data-search="true" id="table">
 			<thead>
 				<tr>
-					<th data-sortable="true" data-field="theme">Thème</th>
+					<a href="google.fr"><th data-sortable="true" data-field="theme">Thème</th></a>
 					<th data-field="ville">Ville</th>
 					<th data-field="lieu">Lieu</th>
 					<th data-field="nbplaces">Nombres de places restantes</th>
@@ -44,12 +44,5 @@
 				</tr>
 			</thead>
 		</table>
-	</div>
-
-	<script>
-	$('#table').on('click-row.bs.table', function (element,row, field) {
-		console.log(row);
-		window.open("http://localhost:8000/hackathon/"+row.idhackathon,"_self")
-	})
-	</script>
+	</div> 
 {% endblock %}

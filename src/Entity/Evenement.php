@@ -59,5 +59,70 @@ class Evenement
      */
     private $idhackathon;
 
+    public function getIdevenement(): ?int
+    {
+        return $this->idevenement;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(?string $libelle): self
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getDateheuredebut(): ?\DateTimeInterface
+    {
+        return $this->dateheuredebut;
+    }
+
+    public function setDateheuredebut(?\DateTimeInterface $dateheuredebut): self
+    {
+        $this->dateheuredebut = $dateheuredebut;
+
+        return $this;
+    }
+
+    public function getDateheurefin(): ?\DateTimeInterface
+    {
+        return $this->dateheurefin;
+    }
+
+    public function setDateheurefin(?\DateTimeInterface $dateheurefin): self
+    {
+        $this->dateheurefin = $dateheurefin;
+
+        return $this;
+    }
+
+    public function getSalle(): ?string
+    {
+        return $this->salle;
+    }
+
+    public function setSalle(?string $salle): self
+    {
+        $this->salle = $salle;
+
+        return $this;
+    }
+
+    public function getIdhackathon(): ?Hackathon
+    {
+        return $this->idhackathon;
+    }
+
+    public function setIdhackathon(?Hackathon $idhackathon): self
+    {
+        $this->idhackathon = $idhackathon;
+
+        return $this;
+    }
+
 
 }

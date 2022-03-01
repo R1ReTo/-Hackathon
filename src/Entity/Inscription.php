@@ -39,14 +39,55 @@ class Inscription
     private $idhackathon;
 
     /**
-     * @var \Paricipant
+     * @var \Participant
      *
-     * @ORM\ManyToOne(targetEntity="Paricipant")
+     * @ORM\ManyToOne(targetEntity="Participant")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="IDPARTICIPANT", referencedColumnName="IDPARTICIPANT")
      * })
      */
     private $idparticipant;
+
+    public function getNumincription(): ?int
+    {
+        return $this->numincription;
+    }
+
+    public function getDateincription(): ?\DateTimeInterface
+    {
+        return $this->dateincription;
+    }
+
+    public function setDateincription(?\DateTimeInterface $dateincription): self
+    {
+        $this->dateincription = $dateincription;
+
+        return $this;
+    }
+
+    public function getIdhackathon(): ?Hackathon
+    {
+        return $this->idhackathon;
+    }
+
+    public function setIdhackathon(?Hackathon $idhackathon): self
+    {
+        $this->idhackathon = $idhackathon;
+
+        return $this;
+    }
+
+    public function getIdparticipant(): ?Participant
+    {
+        return $this->idparticipant;
+    }
+
+    public function setIdparticipant(?Participant $idparticipant): self
+    {
+        $this->idparticipant = $idparticipant;
+
+        return $this;
+    }
 
 
 }

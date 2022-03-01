@@ -45,5 +45,53 @@ class Conference
      */
     private $idevenement;
 
+    public function getNomintervenant(): ?string
+    {
+        return $this->nomintervenant;
+    }
+
+    public function setNomintervenant(?string $nomintervenant): self
+    {
+        $this->nomintervenant = $nomintervenant;
+
+        return $this;
+    }
+
+    public function getPrenomintervenant(): ?string
+    {
+        return $this->prenomintervenant;
+    }
+
+    public function setPrenomintervenant(?string $prenomintervenant): self
+    {
+        $this->prenomintervenant = $prenomintervenant;
+
+        return $this;
+    }
+
+    public function getSujet(): ?string
+    {
+        return $this->sujet;
+    }
+
+    public function setSujet(?string $sujet): self
+    {
+        $this->sujet = $sujet;
+
+        return $this;
+    }
+
+    public function getIdevenement(): ?Evenement
+    {
+        return $this->idevenement;
+    }
+
+    public function setIdevenement(?Evenement $idevenement): self
+    {
+        $this->idevenement = $idevenement;
+
+        return $this;
+    }
+
 
 }

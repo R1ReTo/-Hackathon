@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hackathon
-{% endblock %}
-
+{% block title %}{% endblock %}
 {% block body %}
 	<style>
 		.example-wrapper {
@@ -31,6 +28,7 @@
                     <p class="card-text">Heure de fin : {{unHackathon.heureFin|date('H:i:s')}}</p>
                     <p class="card-text">Date limite pour l'inscription : {{unHackathon.dateLimite|date('d/m/Y')}}</p>
                     <p class="card-text">Nombres de places restantes : {{unHackathon.nbplaces}}</p>
+					<button href="{{ path('updateHackathon') }}" type="button" class="btn btn-primary">Inscription</button>
 				</div>
 			</div>
 		</div>

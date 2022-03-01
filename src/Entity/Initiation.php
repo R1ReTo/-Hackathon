@@ -31,5 +31,29 @@ class Initiation
      */
     private $idevenement;
 
+    public function getNbplacesinit(): ?string
+    {
+        return $this->nbplacesinit;
+    }
+
+    public function setNbplacesinit(?string $nbplacesinit): self
+    {
+        $this->nbplacesinit = $nbplacesinit;
+
+        return $this;
+    }
+
+    public function getIdevenement(): ?Evenement
+    {
+        return $this->idevenement;
+    }
+
+    public function setIdevenement(?Evenement $idevenement): self
+    {
+        $this->idevenement = $idevenement;
+
+        return $this;
+    }
+
 
 }
