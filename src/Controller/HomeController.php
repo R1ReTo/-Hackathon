@@ -63,6 +63,16 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @Route("/hackathon/{ville}", name="villeHackathon")
+     */
+    public function villeHackathon($ville): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $hackathon = $repository->find($ville);
+        return $this->render('listeHackathon.html.twig',['unHackathon'=>$hackathon]);
+    }
+
+    /**
      * @Route("/hackathon/update/{id}", name="updateHackathon")
      */
     public function updateHackathon($id)
@@ -71,34 +81,37 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $inscription = new Inscription;
         $hackathon = $repository->find($id);
+        $uneDate=new \DateTime(date($format='Y-m-d'));
+        $nbplace = $hackathon->getNbplaces();
+        
+        if($nbplace <= 0){
+
+        echo "erreur";
+        }
+        elseif($hackathon->getDatelimite() <= $uneDate){
+        
+
+            echo "erreur2";
+        }
+        else{ 
         $hackathon->setNbplaces($hackathon->getNbplaces()-1);
         $em=$this->getDoctrine()->getManager();
         $em->persist($hackathon);
-        $em->flush();
         dump($hackathon->getIdhackathon());
         $inscription->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
         $inscription->setIdparticipant($participant);
-        $uneDate=new \DateTime(date($format='Y-m-d'));
+        
         $inscription->setDateincription($uneDate);
         $em->persist($inscription);
         $em->flush();
+        
+        
+        }
         return $this->render('pageAccueil.html.twig');
          
     }
 
-    /**
-     * @Route("/inscription/{idparticipant}&{idhackathon}&{dateincription}", name="detailHackathon")
-     */
-   /* public function inscription($idparticipant,$idhackathon,$dateincription)
-    {
-        $inscription = new Inscription();
-        $inscription->setIdparticipant($idparticipant);
-        $inscription->setIdhackathon($idhackathon);
-        $inscription->setDateincription($dateincription);
-        return $this->render('pageAccueil.html.twig');
-    }
-    */
-
+   
     /**
      * @Route("/api/listeAtelier/{idhackathon}", name="listeAtelier")
      */

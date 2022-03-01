@@ -17,11 +17,11 @@
 	</style>
 	<br><br>
 	<div class="container">
+		<div class="row">
 			{% for unHackathon in lesHackathons %}
 
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card" style="width: 18rem;">
+					<div class="col-sm-4">
+						<div class="card" style="width: 20rem; height: 420px; margin-bottom:20px;">
 							<img src={{unHackathon.image}} class="card-img-top">
 							<div class="card-body">
 								<h5 class="card-title">{{unHackathon.theme}}</h5>
@@ -31,7 +31,8 @@
 							<a type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
 						</div>
 					</div>
-				</div>
+				
 			{% endfor %}
+			</div>
 	</div>
 {% endblock %}
