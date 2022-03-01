@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Hackathon;
+use App\Entity\Inscription;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\HackathonRepository;
@@ -11,6 +12,7 @@ use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Serializer;
 
 
@@ -63,17 +65,26 @@ class HomeController extends AbstractController
     /**
      * @Route("/hackathon/update/{id}", name="updateHackathon")
      */
-    // public function updateHackathon($id)
-    // {
-    //     $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-    //     $hackathon = $repository->find($id);
-    //     return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
-    //     $hackathon->setNbplaces($hackathon->getNbplaces()-1);
-    //     $em=$this->getDoctrine()->getManager();
-    //     $em->persist($hackathon);
-    //     $em->flush();
+    public function updateHackathon($id)
+    {
+        $participant = $this->getUser();
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $inscription = new Inscription;
+        $hackathon = $repository->find($id);
+        $hackathon->setNbplaces($hackathon->getNbplaces()-1);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($hackathon);
+        $em->flush();
+        dump($hackathon->getIdhackathon());
+        $inscription->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
+        $inscription->setIdparticipant($participant);
+        $uneDate=new \DateTime(date($format='Y-m-d'));
+        $inscription->setDateincription($uneDate);
+        $em->persist($inscription);
+        $em->flush();
+        return $this->render('pageAccueil.html.twig');
          
-    // }
+    }
 
     /**
      * @Route("/inscription/{idparticipant}&{idhackathon}&{dateincription}", name="detailHackathon")
