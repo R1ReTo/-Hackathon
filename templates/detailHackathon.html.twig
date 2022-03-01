@@ -28,7 +28,11 @@
                     <p class="card-text">Heure de fin : {{unHackathon.heureFin|date('H:i:s')}}</p>
                     <p class="card-text">Date limite pour l'inscription : {{unHackathon.dateLimite|date('d/m/Y')}}</p>
                     <p class="card-text">Nombres de places restantes : {{unHackathon.nbplaces}}</p>
-					<button href="{{ path('updateHackathon') }}" type="button" class="btn btn-primary">Inscription</button>
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+									<a href={{path('updateHackathon',{'id':unHackathon.idhackathon})}}><button  type="button" class="btn btn-primary">Inscription</button></a>
+					{% endif %}
+					
+					
 				</div>
 			</div>
 		</div>
