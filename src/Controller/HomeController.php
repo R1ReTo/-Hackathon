@@ -7,6 +7,7 @@ use App\Entity\Inscription;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\HackathonRepository;
+use SebastianBergmann\Environment\Console;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Serializer;
+
 
 
 class HomeController extends AbstractController
@@ -81,23 +83,28 @@ class HomeController extends AbstractController
     /**
      * @Route("/hackathon/update/{id}", name="updateHackathon")
      */
-    public function updateHackathon($id)
+    public function updateHackathon($id, HackathonRepository $hackathonRepository)
     {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $products = $repository->findAll();
+        $lesVilles = $hackathonRepository->selectville();
         $participant = $this->getUser();
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $inscription = new Inscription;
         $hackathon = $repository->find($id);
         $uneDate=new \DateTime(date($format='Y-m-d'));
         $nbplace = $hackathon->getNbplaces();
+        $error = '';
+        
         
         if($nbplace <= 0){
 
-        echo "erreur";
+            $error ="erreur";
         }
         elseif($hackathon->getDatelimite() <= $uneDate){
         
 
-            echo "erreur2";
+            $error ="erreur2";
         }
         else{ 
         $hackathon->setNbplaces($hackathon->getNbplaces()-1);
@@ -110,10 +117,10 @@ class HomeController extends AbstractController
         $inscription->setDateincription($uneDate);
         $em->persist($inscription);
         $em->flush();
-        
+            
         
         }
-        return $this->render('pageAccueil.html.twig');
+        return $this->render('listeHackathon.html.twig', ['error'=>$error, 'lesHackathons' => $products, 'lesVilles' => $lesVilles]);
          
     }
 

@@ -15,7 +15,25 @@
 			padding: 2px 6px;
 		}
 	</style>
-	<br><br>
+	
+	{% if error is defined %}
+	{% if error == 'erreur2'%}
+		<div class="alert alert-danger d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div>
+    Date limite dépassée
+  </div>
+</div>
+	{% endif %}
+	{% if error == 'erreur'%}
+		<div class="alert alert-danger d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div>
+    Plus de place disponible
+  </div>
+</div>
+	{% endif %}
+	{% endif %}
 	<div class="container">
 	{% for uneVille in lesVilles %}
 			<a type="button" class="btn btn-primary" href={{path ('villeHackathon', {'ville':uneVille.ville} )}}>{{uneVille.ville}}</a>
@@ -40,4 +58,5 @@
 			{% endfor %}
 			</div>
 	</div>
+	
 {% endblock %}

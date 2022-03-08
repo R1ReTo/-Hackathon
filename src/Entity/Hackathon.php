@@ -105,6 +105,13 @@ class Hackathon
      */
     private $image;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
     public function getIdhackathon(): ?int
     {
         return $this->idhackathon;
@@ -250,6 +257,18 @@ class Hackathon
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
