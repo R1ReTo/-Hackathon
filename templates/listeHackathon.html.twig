@@ -3,35 +3,43 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
-	<br><br>
-	<div class="container">
-		<div class="row">
-			{% for unHackathon in lesHackathons %}
+	<div style="text-align: center;">
+		<style>
+			.example-wrapper {
+				margin: 1em auto;
+				max-width: 800px;
+				width: 95%;
+				font: 18px / 1.5 sans-serif;
+			}
+			.example-wrapper code {
+				background: #F5F5F5;
+				padding: 2px 6px;
+			}
+		</style>
+		<br><br>
+		<div class="container">
+			{% for uneVille in lesVilles %}
+				<a type="button" class="btn btn-primary" href={{path ('villeHackathon', {'ville':uneVille.ville} )}}>{{uneVille.ville}}</a>
 
-				<div class="col-sm-4">
-					<div class="card" style="width: 20rem; height: 420px; margin-bottom:20px;">
-						<img src={{unHackathon.image}} class="card-img-top">
-						<div class="card-body">
-							<h5 class="card-title">{{unHackathon.theme}}</h5>
-							<p class="card-text">{{unHackathon.dateLimite|date('y/m/d')}}</p>
-							<p class="card-text">{{unHackathon.nbplaces}}</p>
-						</div>
-						<a type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
-					</div>
-				</div>
 			{% endfor %}
+			<br><br>
+		</div>
+		<div class="container" style="text-align: center;">
+			<div class="row">
+				{% for unHackathon in lesHackathons %}
+					<div class="col-sm-4">
+						<div class="card" style="width: 20rem; height: 420px; margin-bottom:20px;">
+							<img src={{unHackathon.image}} class="card-img-top">
+							<div class="card-body">
+								<h5 class="card-title">{{unHackathon.theme}}</h5>
+								<p class="card-text">{{unHackathon.dateLimite|date('y/m/d')}}</p>
+								<p class="card-text">{{unHackathon.nbplaces}}</p>
+							</div>
+							<a type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 {% endblock %}

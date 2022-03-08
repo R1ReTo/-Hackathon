@@ -31,14 +31,28 @@ class HomeController extends AbstractController
     /**
      * @Route("/listeHackathon", name="listeHackathon")
      */
-    public function index(): Response
+    public function index(HackathonRepository $hackathonRepository): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $products = $repository->findAll();
-        return $this->render('listeHackathon.html.twig', ['lesHackathons' => $products]);
+        $lesVilles = $hackathonRepository->selectville();
+        return $this->render('listeHackathon.html.twig', ['lesHackathons' => $products, 'lesVilles' => $lesVilles]);       
     }
 
+     /**
+     * @Route("/listeHackathon/{ville}", name="villeHackathon")
+     */
+    public function lstville($ville, HackathonRepository $hackathonRepository): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        
+        $products = $repository->findBy(['ville' => $ville]);
+        $lesVilles = $hackathonRepository->selectville();
+        
 
+        //$products = $repository->findAll();
+        return $this->render('listeHackathon.html.twig', ['lesHackathons' => $products, 'lesVilles' => $lesVilles]);       
+    }
     /**
      * @Route("/getHackathon", name="getHackathon",methods="GET")
      */
@@ -63,15 +77,6 @@ class HomeController extends AbstractController
         return $this->render('detailHackathon.html.twig', ['unHackathon' => $hackathon]);
     }
 
-    /**
-     * @Route("/hackathon/{ville}", name="villeHackathon")
-     */
-    public function villeHackathon($ville): Response
-    {
-        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $hackathon = $repository->find($ville);
-        return $this->render('listeHackathon.html.twig', ['unHackathon' => $hackathon]);
-    }
 
     /**
      * @Route("/hackathon/update/{id}", name="updateHackathon")
