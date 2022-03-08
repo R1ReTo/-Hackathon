@@ -7,6 +7,7 @@ use App\Entity\Inscription;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\HackathonRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,14 +28,14 @@ class HomeController extends AbstractController
     }
 
 
-     /**
+    /**
      * @Route("/listeHackathon", name="listeHackathon")
      */
     public function index(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $products = $repository->findAll();
-        return $this->render('listeHackathon.html.twig', ['lesHackathons' => $products]);       
+        return $this->render('listeHackathon.html.twig', ['lesHackathons' => $products]);
     }
 
 
@@ -47,11 +48,11 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $products = $repository->findAll();
         $json = $serializer->serialize($products, 'json');
-        return new Response($json); 
+        return new Response($json);
     }
 
 
- 
+
     /**
      * @Route("/hackathon/{id}", name="detailHackathon")
      */
@@ -59,7 +60,17 @@ class HomeController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $hackathon = $repository->find($id);
-        return $this->render('detailHackathon.html.twig',['unHackathon'=>$hackathon]);
+        return $this->render('detailHackathon.html.twig', ['unHackathon' => $hackathon]);
+    }
+
+    /**
+     * @Route("/hackathon/{ville}", name="villeHackathon")
+     */
+    public function villeHackathon($ville): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $hackathon = $repository->find($ville);
+        return $this->render('listeHackathon.html.twig', ['unHackathon' => $hackathon]);
     }
 
     /**
@@ -71,18 +82,34 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $inscription = new Inscription;
         $hackathon = $repository->find($id);
-        $hackathon->setNbplaces($hackathon->getNbplaces()-1);
-        $em=$this->getDoctrine()->getManager();
-        $em->persist($hackathon);
-        $em->flush();
-        dump($hackathon->getIdhackathon());
-        $inscription->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
-        $inscription->setIdparticipant($participant);
-        $uneDate=new \DateTime(date($format='Y-m-d'));
-        $inscription->setDateincription($uneDate);
-        $em->persist($inscription);
-        $em->flush();
-        return $this->render('pageAccueil.html.twig');
+        $uneDate = new \DateTime(date($format = 'Y-m-d'));
+        $nbplace = $hackathon->getNbplaces();
+
+        if ($nbplace <= 0) {
+
+            echo "erreur";
+        } 
+        
+        elseif ($hackathon->getDatelimite() <= $uneDate) {
+            echo "erreur2";
+        }
          
+        elseif($participant == $inscription->getIdparticipant() && $hackathon == $inscription->getIdhackathon()){
+            echo "Vous êtes déjà inscrit à cette évenement";
+        }
+
+        else {
+            $hackathon->setNbplaces($hackathon->getNbplaces() - 1);
+            $em = $this->getDoctrine()->getManager(); 
+            $em->persist($hackathon);
+            dump($hackathon->getIdhackathon());
+            $inscription->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
+            $inscription->setIdparticipant($participant);
+
+            $inscription->setDateincription($uneDate);
+            $em->persist($inscription);
+            $em->flush();
+        }
+        return $this->render('pageAccueil.html.twig');
     }
 }

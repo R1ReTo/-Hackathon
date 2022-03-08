@@ -41,6 +41,6 @@ class ApiController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Initiation::class);
         $products = $repository->findBy(['idevenement' => $idevenement]);
         $json = $serializer->serialize($products, 'json');
-        return new Response($json); 
+        return new Response($json);
     }
 }
