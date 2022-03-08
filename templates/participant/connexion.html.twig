@@ -9,7 +9,7 @@
 </style>
 {% if errors %}
  <div class="alert alert-danger">
- {{ errors.messageKey|trans(errors.messageData, 'security') }}
+ Login ou mot de passe incorrect
  </div>
 {% endif %}
  <form action="{{ path('connexionParticipant') }}" method="post">
@@ -19,4 +19,5 @@
  <input type="password" id="password" name="_password"/>
  <button type="submit">Connexion</button>
  </form>
+ <div> Vous n'avez pas de compte, alors <a  class="alert-link" href="{{path('addParticipant')}}">inscrivez-vous</a></div>
 {% endblock %}

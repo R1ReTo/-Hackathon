@@ -17,6 +17,12 @@
 	</style>
 	<br><br>
 	<div class="container">
+	{% for uneVille in lesVilles %}
+			<a type="button" class="btn btn-primary" href={{path ('villeHackathon', {'ville':uneVille.ville} )}}>{{uneVille.ville}}</a>
+	{% endfor %}
+	<br><br>
+	</div>
+	<div class="container">
 		<div class="row">
 			{% for unHackathon in lesHackathons %}
 
@@ -31,7 +37,6 @@
 							<a type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
 						</div>
 					</div>
-				
 			{% endfor %}
 			</div>
 	</div>

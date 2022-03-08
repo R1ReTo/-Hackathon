@@ -36,15 +36,15 @@ class HackathonRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Hackathon
+    
+    public function selectville()
     {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $this->createQueryBuilder('h')
+        ->select('h.ville')
+        ->groupBy('h.ville')
+        ->getQuery();
+        $distinc = $query->getResult();
+        return $distinc;
     }
-    */
+    
 }
