@@ -1,50 +1,19 @@
 {% extends 'base.html.twig' %}
 
+
+{% block javascripts %}
+	<script type="text/javascript" src={{asset("js/favoris.js")}}></script>
+
+{% endblock %}
 {% block title %}{% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
-	
-	{% if error is defined %}
-	{% if error == 'erreur2'%}
-		<div class="alert alert-danger d-flex align-items-center" role="alert">
-  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-  <div>
-    Date limite dépassée
-  </div>
-</div>
-	{% endif %}
-	{% if error == 'erreur'%}
-		<div class="alert alert-danger d-flex align-items-center" role="alert">
-  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-  <div>
-    Plus de place disponible
-  </div>
-</div>
-	{% endif %}
-	{% endif %}
-	<div class="container">
-	{% for uneVille in lesVilles %}
-			<a type="button" class="btn btn-primary" href={{path ('villeHackathon', {'ville':uneVille.ville} )}}>{{uneVille.ville}}</a>
-	{% endfor %}
-	<br><br>
-	</div>
-	<div class="container">
-		<div class="row">
-			{% for unHackathon in lesHackathons %}
-=======
+	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+		<symbol id="exclamation-triangle-fill" fill="currentColor" viewbox="0 0 16 16">
+			<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+		</symbol>
+	</svg>
+
 	<div style="text-align: center;">
 		<style>
 			.example-wrapper {
@@ -58,11 +27,28 @@
 				padding: 2px 6px;
 			}
 		</style>
-		<br><br>
+
+		{% if error is defined %}
+			{% if error == "erreur"%}
+				<div class="alert alert-danger d-flex align-items-center" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+					<div>
+						Plus de place disponible
+					</div>
+				</div>
+			{% endif %}
+			{% if error == "erreur2"%}
+				<div class="alert alert-danger d-flex align-items-center" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+					<div>
+						Date limit dépasser
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
 		<div class="container">
 			{% for uneVille in lesVilles %}
 				<a type="button" class="btn btn-primary" href={{path ('villeHackathon', {'ville':uneVille.ville} )}}>{{uneVille.ville}}</a>
->>>>>>> 5798533b56af9d23483243d33871177bf9a7afa1
 
 			{% endfor %}
 			<br><br>
@@ -75,15 +61,22 @@
 							<img src={{unHackathon.image}} class="card-img-top">
 							<div class="card-body">
 								<h5 class="card-title">{{unHackathon.theme}}</h5>
+									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+								<p>
+									
+								<a id="favoris" type="button" href={{path ('hackathonFavoris', {'id':unHackathon.idHackathon })}} >  <i class="bi bi-star"  style="width:16; height:16; color:#FACA5B;"></i></a>
+								
+									{% endif %}
+								<p>
 								<p class="card-text">{{unHackathon.dateLimite|date('y/m/d')}}</p>
 								<p class="card-text">{{unHackathon.nbplaces}}</p>
 							</div>
-							<a type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
+							<a  type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
 						</div>
 					</div>
 				{% endfor %}
 			</div>
 		</div>
 	</div>
-	
+
 {% endblock %}

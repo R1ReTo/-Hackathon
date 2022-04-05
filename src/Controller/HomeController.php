@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
+use App\Entity\Favoris;
 use App\Entity\Hackathon;
 use App\Entity\Inscription;
 use App\Entity\Participant;
-use App\Form\ParticipantType;
+use App\Form\InscriptionType;
+use App\Form\CommentaireType;
 use App\Repository\HackathonRepository;
 use SebastianBergmann\Environment\Console;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -59,10 +62,10 @@ class HomeController extends AbstractController
      */
     public function getHackathon(): Response
     {
-        $serializer = $this->get('serializer');
-        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $products = $repository->findAll();
-        $json = $serializer->serialize($products, 'json');
+            $serializer = $this->get('serializer');
+            $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+            $products = $repository->findAll();
+            $json = $serializer->serialize($products, 'json');
         return new Response($json);
     }
 
@@ -71,11 +74,28 @@ class HomeController extends AbstractController
     /**
      * @Route("/hackathon/{id}", name="detailHackathon")
      */
-    public function detailHackathon($id): Response
+    public function detailHackathon($id, Request $request): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $hackathon = $repository->find($id);
-        return $this->render('detailHackathon.html.twig', ['unHackathon' => $hackathon]);
+        $repository = $this->getDoctrine()->getRepository(Commentaire::class);
+        $commentaire = new Commentaire;
+        $lesCommentaire = $repository->findBy(['idhackathon' => $id]);
+        $form=$this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+        $uneDate = new \DateTime(date($format = 'Y-m-d'));
+        $commentaire->setDatecom($uneDate);
+        $commentaire->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
+        if ($form->isSubmitted() == true)
+        {
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($commentaire);
+            $em->flush();
+            return $this->redirectToRoute('listeHackathon');
+        }
+
+        
+        return $this->render('detailHackathon.html.twig', ['unHackathon' => $hackathon, 'lesCommentaires' => $lesCommentaire, 'form'=>$form->createView()]);
     }
 
 
@@ -112,7 +132,6 @@ class HomeController extends AbstractController
         dump($hackathon->getIdhackathon());
         $inscription->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
         $inscription->setIdparticipant($participant);
-        
         $inscription->setDateincription($uneDate);
         $em->persist($inscription);
         $em->flush();
@@ -122,4 +141,35 @@ class HomeController extends AbstractController
         return $this->render('listeHackathon.html.twig', ['error'=>$error, 'lesHackathons' => $products, 'lesVilles' => $lesVilles]);
          
     }
+
+     /**
+     * @Route("/listeHackathon/{id}/favoris", name="hackathonFavoris")
+     */
+
+    public function favoris($id): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Favoris::class);
+        $leFavori = $repository->findOneBy(['idhackathon' => $id, 'idparticipant' => $this->getUser()]);
+        dump(is_null($leFavori));
+        if (is_null($leFavori) == true) {
+            $favoris = new Favoris;
+            $favoris->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
+            $favoris->setIdparticipant($this->getUser());
+            dump($favoris);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($favoris);
+           
+        }
+        else{
+            $repository = $this->getDoctrine()->getRepository(Favoris::class);
+            $leFavori = $repository->findOneBy(['idhackathon' => $id, 'idparticipant' => $this->getUser()]);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($leFavori);
+        
+        }
+        $em->flush();
+        return $this->redirectToRoute('listeHackathon');
+    }
+
+
 }

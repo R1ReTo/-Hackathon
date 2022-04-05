@@ -29,6 +29,13 @@ class Inscription
     private $dateincription;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
      * @var \Hackathon
      *
      * @ORM\ManyToOne(targetEntity="Hackathon")
@@ -61,6 +68,18 @@ class Inscription
     public function setDateincription(?\DateTimeInterface $dateincription): self
     {
         $this->dateincription = $dateincription;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

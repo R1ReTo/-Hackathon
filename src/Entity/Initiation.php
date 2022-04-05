@@ -17,7 +17,7 @@ class Initiation
      *
      * @ORM\Column(name="NBPLACESINIT", type="bigint", nullable=true)
      */
-    protected $nbplacesinit;
+    private $nbplacesinit;
 
     /**
      * @var \Evenement
