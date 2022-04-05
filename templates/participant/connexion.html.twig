@@ -3,21 +3,35 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-{% if errors %}
- <div class="alert alert-danger">
- Login ou mot de passe incorrect
- </div>
-{% endif %}
- <form action="{{ path('connexionParticipant') }}" method="post">
- <label for="login">Login:</label>
- <input type="text" id="login" name="_username" value="{{ lastUsername }}"/>
- <label for="password">Password:</label>
- <input type="password" id="password" name="_password"/>
- <button type="submit">Connexion</button>
- </form>
- <div> Vous n'avez pas de compte, alors <a  class="alert-link" href="{{path('addParticipant')}}">inscrivez-vous</a></div>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+	{% if errors %}
+		<div class="alert alert-danger">
+			Login ou mot de passe incorrect
+		</div>
+	{% endif %}
+	<div style="text-align: center; margin-top: 10%;">
+		<h1 style="margin-bottom: 40px">Connexion</h1>
+		<form action="{{ path('connexionParticipant') }}" method="post">
+			<label for="login">Login:</label>
+			<input style="margin-left: 45%; width: 200px" class="form-control" type="text" id="login" name="_username" value="{{ lastUsername }}"/><br>
+			<label for="password">Password:</label>
+			<input style="margin-left: 45%; width: 200px"class="form-control" type="password" id="password" name="_password"/><br>
+			<button type="submit" style="margin-top: 10px; " class="btn btn-outline-primary">Connexion</button>
+		</form>
+		<div style="margin-top: 15px; ">
+			Vous n'avez pas de compte, alors
+			<a class="alert-link" href="{{path('addParticipant')}}">inscrivez-vous</a>
+		</div>
+	</div>
 {% endblock %}
