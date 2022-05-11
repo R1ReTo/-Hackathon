@@ -62,4 +62,17 @@ class ApiController extends AbstractController
         return new Response($json);
     }
 
+     /**
+     * @Route("/getHackathon", name="getHackathon",methods="GET")
+     */
+    public function getHackathon(): Response
+    {
+            $serializer = $this->get('serializer');
+            $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+            $products = $repository->findAll();
+            $json = $serializer->serialize($products, 'json');
+        return new Response($json);
+    }
+
+
 }

@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Conference
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="IDEVENEMENT", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idevenement;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="NOMINTERVENANT", type="string", length=20, nullable=true, options={"fixed"=true})
@@ -34,16 +43,16 @@ class Conference
     private $sujet;
 
     /**
-     * @var \Evenement
+     * @var string
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Evenement")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDEVENEMENT", referencedColumnName="IDEVENEMENT")
-     * })
+     * @ORM\Column(name="mail", type="string", length=255, nullable=false)
      */
-    private $idevenement;
+    private $mail;
+
+    public function getIdevenement(): ?int
+    {
+        return $this->idevenement;
+    }
 
     public function getNomintervenant(): ?string
     {
@@ -81,14 +90,14 @@ class Conference
         return $this;
     }
 
-    public function getIdevenement(): ?Evenement
+    public function getMail(): ?string
     {
-        return $this->idevenement;
+        return $this->mail;
     }
 
-    public function setIdevenement(?Evenement $idevenement): self
+    public function setMail(string $mail): self
     {
-        $this->idevenement = $idevenement;
+        $this->mail = $mail;
 
         return $this;
     }

@@ -3,14 +3,13 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         App\Entity\Participant:
-            algorithm: plaintext
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
     # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\Participant # classe d'utilisateurs (elle peut avoir un autre nom que User)
-
                 property: login # propriété de la classe d'utilisateurs qui joue le rôle de login
 
     firewalls:
@@ -23,9 +22,9 @@ security:
                 login_path: connexionParticipant
                 check_path: connexionParticipant
             logout:
-                path: security_logout
-                    # La route sur laquelle doit être redirigé l'utilisateur après une déconnexion
-                target: http://localhost:8000/
+                path: /logout
+                target: /
+            switch_user: ~
  
             provider: app_user_provider
 

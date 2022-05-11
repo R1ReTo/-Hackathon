@@ -61,22 +61,34 @@
 							<img src={{unHackathon.image}} class="card-img-top">
 							<div class="card-body">
 								<h5 class="card-title">{{unHackathon.theme}}</h5>
-									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-								<p>
-									
-								<a id="favoris" type="button" href={{path ('hackathonFavoris', {'id':unHackathon.idHackathon })}} >  <i class="bi bi-star"  style="width:16; height:16; color:#FACA5B;"></i></a>
-								
+								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+									<p>
+									{% set estFavoris = false %}
+										{% for unFavoris in lesFavoris %}
+											{% if unFavoris.idHackathon.idHackathon == unHackathon.idHackathon   %}
+												{% set estFavoris = true %}													
+											{% endif %}
+											
+										{% endfor %}
+										{% if estFavoris == true %}
+											<a id="pierre" type="button" class="po bi bi-star-fill" style="width:16; height:16; color:#FACA5B;" href={{path ('hackathonFavoris', {'id':unHackathon.idHackathon } )}}>
+											</a>
+											{% else %}
+												<a id="favoris" type="button" class="po bi bi-star" style="width:16; height:16; color:#FACA5B;" href={{path ('hackathonFavoris', {'id':unHackathon.idHackathon } )}}>
+												</a>
+											{% endif %}
+												
 									{% endif %}
-								<p>
-								<p class="card-text">{{unHackathon.dateLimite|date('y/m/d')}}</p>
-								<p class="card-text">{{unHackathon.nbplaces}}</p>
+									<p></p>
+									<p class="card-text">{{unHackathon.dateLimite|date('y/m/d')}}</p>
+									<p class="card-text">{{unHackathon.nbplaces}}</p>
+								</div>
+								<a type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
 							</div>
-							<a  type="button" class="btn btn-primary" href={{path ('detailHackathon', {'id':unHackathon.idHackathon} )}}>En savoir plus</a>
 						</div>
-					</div>
-				{% endfor %}
+					{% endfor %}
+				</div>
 			</div>
 		</div>
-	</div>
 
-{% endblock %}
+	{% endblock %}

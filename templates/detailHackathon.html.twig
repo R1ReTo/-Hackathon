@@ -55,12 +55,6 @@
 					{{unHackathon.dateLimite|date('d/m/Y')}}</p>
 				<p class="card-text">Nombres de places restantes :
 					{{unHackathon.nbplaces}}</p>
-				{{ form_start(form) }}
-				{{ form_row(form.description) }}
-				{{ form_end(form) }}
-				{% for unCommentaire in lesCommentaires%}
-					<p class="card-text">{{unCommentaire.description}}</p>
-				{% endfor %}
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 					<a href={{path('updateHackathon',{'id':unHackathon.idhackathon} )}}>
 						<button type="button" class="btn btn-primary">Inscription</button>
