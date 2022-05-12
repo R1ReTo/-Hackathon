@@ -23,7 +23,7 @@ for (var i = 0; i < lesLiens.length; i++) {
         event.preventDefault()
 
         let baliseA = event.target.parentNode
-        console.log(event.target.parentNode)
+        console.log(event.target.childNode)
         let url = baliseA.getAttribute('href')
         fetch(url).then(function (response) {
             if (response.ok)
