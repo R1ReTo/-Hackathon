@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class ParticipantType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -22,7 +21,7 @@ class ParticipantType extends AbstractType
             ->add('datenaissance')
             ->add('portfolio')
             ->add('login')
-            ->add('password');
+            ->add('password', );
                 array(
                     'class' => Participant::class,
                     'choice_label' => 'libelle', // libelle est la propriété de l'entité Genre que l'on veut afficher
