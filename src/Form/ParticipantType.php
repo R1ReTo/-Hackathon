@@ -8,6 +8,7 @@ use App\Entity\Serie;
 use App\Repository\ParticipantRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 class ParticipantType extends AbstractType
@@ -21,7 +22,7 @@ class ParticipantType extends AbstractType
             ->add('datenaissance')
             ->add('portfolio')
             ->add('login')
-            ->add('password', );
+            ->add('password', PasswordType::class);
                 array(
                     'class' => Participant::class,
                     'choice_label' => 'libelle', // libelle est la propriété de l'entité Genre que l'on veut afficher
